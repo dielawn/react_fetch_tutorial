@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const Image = () => {
+const useImageURL = (index) => {
     const [imageURL, setImageURL] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -13,10 +13,15 @@ export const Image = () => {
             }
             return response.json()
         })
-        .then((response) => setImageURL(response[0].url))
+        .then((response) => setImageURL(response[index].url))
         .catch((error) => setError(`Error in fetch ${error}`))
         .finally(() => setLoading(false))
     }, [])
+    return {imageURL, error,loading}
+}
+
+export const Image = ({index}) => {
+    const {imageURL, error, loading} = useImageURL(index)
 
     if (error) return <p>A network error was encountered: {error}</p>
     if (loading) return <p>Loading...</p>

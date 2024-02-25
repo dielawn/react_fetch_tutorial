@@ -4,7 +4,11 @@ function App() {
  
 
   return (
-    <Image />
+   <div>
+     <Image index='0'/>
+    <Image index='420'/>
+    <Image index='69'/>
+   </div>
   )
 }
 
